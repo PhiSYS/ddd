@@ -28,9 +28,9 @@
     }
   },
   "require": {
-    "php": "^7.4",
+    "php": "^7.4|^8.0",
     "ext-json": "*",
-    "ramsey/uuid": "^3.7"
+    "ramsey/uuid": "^3.7|^4"
   },
   "require-dev": {
     "pccomponentes/ganchudo": "^1.0",
