@@ -54,12 +54,20 @@ class CollectionValueObject implements \Iterator, \Countable, ValueObject
 
     public function map(callable $func): CollectionValueObject
     {
-        return new self(\array_map($func, $this->items));
+        return new static(\array_map($func, $this->items));
     }
 
     public function reduce(callable $func, $initial)
     {
         return \array_reduce($this->items, $func, $initial);
+    }
+
+    public function sort(callable $func)
+    {
+        $items = $this->items;
+        \usort($items, $func);
+
+        return new static($items);
     }
 
     public function isEmpty(): bool
@@ -95,5 +103,10 @@ class CollectionValueObject implements \Iterator, \Countable, ValueObject
         return $this->filter(
             static fn ($current) => $current !== $item,
         );
+    }
+
+    public function first()
+    {
+        return $this->items[array_key_first($this->items)] ?? null;
     }
 }
